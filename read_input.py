@@ -1,7 +1,7 @@
 #required imports (probably codecs for utf-8 encoding and either stdin or file)
+from sys import stdin
 
 
 def get_query():
-    #READ QUERY (EITHER FROM A FILE OR FROM STDIN)
-    #RETURN QUERY IN SOME FORMAT (STRING, OBJECT, ARRAY)
-    return
+    query = stdin.readlines()
+    return query
