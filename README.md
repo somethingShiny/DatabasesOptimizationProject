@@ -15,6 +15,8 @@ Once we actually get started working on things, I'm sure I'll come up with more 
 
 [Python Coding Standards](https://www.python.org/dev/peps/pep-0008)
 
+[Good (free) Python IDE](https://www.jetbrains.com/pycharm/)
+
 Once I look more closely at the assignment, I'll add more to the README to make things clearer.
 
 ### Notes on committing
