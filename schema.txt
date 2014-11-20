@@ -1,0 +1,4 @@
+1) Schemas of the underlying relations;
+a. Sailors(sid:integer, sname:string, rating:integer, age:real)
+b. Boats(bid:integer, bname:string, color:string)
+c. Reserves(sid:integer, bid:integer, day:date)
