@@ -1,7 +1,11 @@
 DatabasesOptimizationProject
 ============================
 
-Once we actually get started working on things, I'm sure I'll come up with more to add to this. Until then here are some notes.
+Currently the format of the queries is as nested lists. There is a single list called queries. Each element of that list is then a list of lines in the query. For example, with the query: 
+'''Select *
+From Boats
+Where bid = 1'''
+the list would look like `[['Select *', 'From Boats', 'Where bid = 1'], [{other query}], [{other query}]]`
 
 
 
