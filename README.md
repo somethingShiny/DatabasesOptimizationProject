@@ -2,9 +2,11 @@ DatabasesOptimizationProject
 ============================
 
 Currently the format of the queries is as nested lists. There is a single list called queries. Each element of that list is then a list of lines in the query. For example, with the query: 
-```Select *
+```
+Select *
 From Boats
-Where bid = 1```
+Where bid = 1
+```
 the list would look like `[['Select *', 'From Boats', 'Where bid = 1'], [{other query}], [{other query}]]`
 
 
@@ -20,6 +22,8 @@ the list would look like `[['Select *', 'From Boats', 'Where bid = 1'], [{other 
 [Python Coding Standards](https://www.python.org/dev/peps/pep-0008)
 
 [Good (free) Python IDE](https://www.jetbrains.com/pycharm/)
+
+[Information on using graphviz from python](https://pypi.python.org/pypi/graphviz)
 
 Once I look more closely at the assignment, I'll add more to the README to make things clearer.
 
