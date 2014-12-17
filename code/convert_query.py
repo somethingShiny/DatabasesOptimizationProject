@@ -11,6 +11,8 @@ PROJECT = 'π '
 SELECT = 'σ '
 AND = '∧'
 
+star_flag = False
+
 def reorder_query(query):
     for i in range(0, len(query) - 1):
         t1 = query[i].lstrip(' ')
@@ -66,20 +68,36 @@ def convert(sqlQuery):
 
         relational_query = rel_string.split('(')
 
+
     #Process SQL line by line, adding relational algebra representation to relational query
     return relational_query
 
 
 def parse_select(select_statement):
+    global star_flag
     rel_select = PROJECT + ' '
-    rel_select = rel_select + select_statement.strip('SELECT')
+    if select_statement.strip('SELECT') == '*':
+        star_flag = True
+    else:
+        rel_select = rel_select + select_statement.strip('SELECT')
     return rel_select
-
+#ADD IN WHAT TO DO IF YOU ENCOUNTER *
+#get tables that are being used
 
 def parse_from(from_statement):
+    global star_flag
     from_statement = from_statement.replace(',', '')
-    rel_from = ' ('
     tokens = from_statement.split()
+    rel_from = ' '
+    if star_flag == True:
+        if not from_statement.find('Sailors') == -1:
+            rel_from = rel_from + 'sid, sname, rating, age '
+        if not from_statement.find('Boats') == -1:
+            rel_from = rel_from + 'bid, bname, color '
+        if not from_statement.find('Reserves') == -1:
+            rel_from = rel_from + 'sid, bid, day '
+        star_flag = False
+    rel_from = rel_from + '('
     #loop through every word
     for i in range(1, len(tokens)):
         token = tokens[i]
@@ -93,6 +111,16 @@ def parse_from(from_statement):
                 rel_from += ' X '
             else:
                 pass
+        # elif not from_statement.find('=') == -1:
+        #     #If the token is =, omit it
+        #     if token == '=':
+        #         pass
+        #     else:
+        #         rel_from = rel_from + token + ' '
+        #     if tokens[i - 1] == '=':
+        #         rel_from += ' X '
+        #     else:
+        #         pass
         else:
             rel_from = rel_from + token + ' X '
 
@@ -115,6 +143,9 @@ def parse_where(where_statement):
             rel_where.replace(prev_token, '')
         elif token == 'AND':
             rel_where += AND + ' '
+        elif token == 'OR':
+            rel_where += 'OR '
+#added OR condition
         else:
             rel_where += token + ' '
             prev_token = token
@@ -129,10 +160,12 @@ def parse_where(where_statement):
 
 def parse_other(line):
     if line == 'INTERSECT':
-        return INTERSECT
+        return 'INTERSECT'
     elif line == 'UNION':
-        return UNION
+        return 'UNION'
     elif line == 'EXCEPT':
         return '-'
+    elif line == 'DIVISION':
+        return '%'
     else:
         raise Exception('INVALID CHARACTER FOUND. CONVERSION OF THIS QUERY ABORTED ' + line)
