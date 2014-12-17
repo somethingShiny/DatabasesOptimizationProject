@@ -14,6 +14,7 @@ def get_query():
     queries = []
     for line in query:
         line = line.strip('\n')
+        line.replace('’', "'")
         if (re.match(new_query, line)):
             add = True
         line = re.sub(new_query, '', line)
@@ -36,7 +37,10 @@ def parse_query(query):
     new_query = re.compile(r'[a-z]\. ')
     lines = []
     queries = []
-
+    #split query by lines
+    #look for beginning of new query
+    #if not beginning of new query, add to current query
+    #else add current query to list of queries, begin new query
     for line in query:
         line = line.replace(')', '')  #Strip off closing parenthesis from nested queries
         line = line.strip('\n')  #Strip newlines
